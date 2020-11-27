@@ -34,7 +34,8 @@ function makeError(Base: typeof Error) {
             super(message(key, args));
             this.code = key;
             // @ts-ignore
-            if (Error.captureStackTrace) {
+            if ('captureStackTrace' in Error) {
+                // @ts-ignore
                 Error.captureStackTrace(this, DissonanceError);
             }
         }
