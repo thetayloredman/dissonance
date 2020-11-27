@@ -20,7 +20,9 @@ import type ErrorData from '../types/ErrorData';
 import { register } from './DissonanceError';
 
 const messages: { [key: string]: ErrorData } = {
-    CLIENT_TOKEN_TYPE: (type: string) => `Provided token type was invalid. Type: ${type}`
+    CLIENT_TOKEN_TYPE: (type: string) => `Provided token type was invalid. Type: ${type}`,
+    TOKEN_INVALID: 'An invalid token was provided.',
+    DJS_UNKNOWN_ERROR: (error: any) => `Discord.js threw an unknown error: ${error}`
 };
 
 for (const [key, data] of Object.entries(messages)) {

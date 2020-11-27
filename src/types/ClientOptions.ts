@@ -16,4 +16,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export interface ClientOptions {}
+import { ClientOptions as DJSOptions } from 'discord.js';
+
+export interface ClientOptions extends DJSOptions {}

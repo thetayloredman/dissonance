@@ -31,4 +31,24 @@ export class Client {
 
     public token: string;
     public client: DJSClient;
+
+    public async login(): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.client
+                .login(this.token)
+                .then(() => {
+                    resolve();
+                })
+                .catch((response) => {
+                    const error = response as { code: string };
+
+                    if (error.code === 'TOKEN_INVALID') {
+                        throw new Error('TOKEN_INVALID');
+                    }
+
+                    // Unknown error
+                    throw new Error('DJS_UNKNOWN_ERROR', error);
+                });
+        });
+    }
 }
