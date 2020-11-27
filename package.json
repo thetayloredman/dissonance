@@ -1,6 +1,6 @@
 {
     "name": "dissonance",
-    "version": "0.0.0",
+    "version": "0.1.0",
     "description": "A Discord API wrapper written in JS!",
     "main": "dist/index.js",
     "scripts": {
