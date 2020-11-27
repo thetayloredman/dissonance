@@ -30,10 +30,11 @@ const messages = new Map<string, ErrorData>();
 function makeError(Base: typeof Error) {
     return class DissonanceError extends Base {
         public constructor(key: string, ...args: any[]) {
+            // eslint-disable-next-line no-use-before-define
             super(message(key, args));
             this.code = key;
             // @ts-ignore
-            if (Error.captureStackTrace) Error.captureStackTrace(this, DiscordjsError);
+            if (Error.captureStackTrace) {Error.captureStackTrace(this, DissonanceError);}
         }
 
         get name() {
@@ -51,13 +52,13 @@ function makeError(Base: typeof Error) {
  * @returns {string} Formatted string
  */
 function message(key: string, args: any[]): string {
-    if (typeof key !== 'string') throw new Error('Error message key must be a string');
+    if (typeof key !== 'string') {throw new Error('Error message key must be a string');}
     const msg = messages.get(key);
     if (!msg) {
         throw new Error(`An invalid error message key was used: ${key}.`);
     } else {
-        if (typeof msg === 'function') return msg(...args);
-        if (args === undefined || args.length === 0) return msg;
+        if (typeof msg === 'function') {return msg(...args);}
+        if (args === undefined || args.length === 0) {return msg;}
         args.unshift(msg);
         return String(...args);
     }
@@ -68,7 +69,7 @@ function message(key: string, args: any[]): string {
  * @param {string} code Error code
  * @param {*} val Error value
  */
-function register(code: string, val: any) {
+function register(code: string, val: ErrorData): void {
     messages.set(code, typeof val === 'function' ? val : String(val));
 }
 
