@@ -16,13 +16,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import type ErrorData from '../types/ErrorData';
-import { register } from './DissonanceError';
+import { Client as DJSClient } from 'discord.js';
+import type { ClientOptions } from '../types/ClientOptions';
+import { Error, TypeError, RangeError } from '../errors/index';
 
-const messages: { [key: string]: ErrorData } = {
-    CLIENT_TOKEN_TYPE: (type: string) => `Provided token type was invalid. Type: ${type}`
-};
+export class Client {
+    public constructor(token: string, options?: ClientOptions) {
+        if (typeof token !== 'string') {
+            throw new TypeError('CLIENT_TOKEN_TYPE', typeof token);
+        }
+        this.token = token;
+        this.client = new DJSClient(options);
+    }
 
-for (const [key, data] of Object.entries(messages)) {
-    register(key, data);
+    public token: string;
+    public client: DJSClient;
 }

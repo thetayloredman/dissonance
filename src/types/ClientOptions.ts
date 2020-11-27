@@ -16,13 +16,4 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import type ErrorData from '../types/ErrorData';
-import { register } from './DissonanceError';
-
-const messages: { [key: string]: ErrorData } = {
-    CLIENT_TOKEN_TYPE: (type: string) => `Provided token type was invalid. Type: ${type}`
-};
-
-for (const [key, data] of Object.entries(messages)) {
-    register(key, data);
-}
+export interface ClientOptions {}

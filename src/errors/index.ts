@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Error, TypeError, RangeError } from './DisssonanceError';
+import { Error, TypeError, RangeError } from './DissonanceError';
 import * as messages from './messages';
 
 export { Error, TypeError, RangeError, messages };
